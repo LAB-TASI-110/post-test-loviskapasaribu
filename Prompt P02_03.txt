@@ -1,7 +1,1 @@
-Bertindaklah sebagai programmer bahasa C yang berpengalaman sekaligus tutor bagi mahasiswa. Saya ingin membuat program bahasa C yang benar, terstruktur, dan dapat dijalankan tanpa error untuk mendukung operasional kafetaria IT Del.
-
-Program harus mampu menerima input dari pengguna berupa nama atau kode menu, jumlah pesanan, dan harga setiap menu. Program kemudian memproses data tersebut untuk menghitung total harga setiap pesanan serta total keseluruhan pembayaran.
-
-Output program harus menampilkan rincian transaksi seperti nama atau kode menu, jumlah pesanan, harga satuan, total per menu, serta total pembayaran dalam bentuk struk pemesanan.
-
-Program harus memiliki logika yang jelas, menggunakan struktur kode yang rapi, serta mudah dipahami oleh mahasiswa yang sedang mempelajari pemrograman bahasa C.
+andaikan kamu seorang programer handal. kembangkan program sederhana dalam bahasa c untuk menangani transaksi pembelian di kaferia it del. program harus mampu menerima beberapa data pesanan yang terdiri dari nama, menu, harga, dan jumlah beli. setiap pesanan dihitng totalnya lalu diakumulasikan mj total keseluruhan, jika total memenuhi syart tertentu, beri potongan harga, lalu tampilkam seluruh rincian transaksi dalam bentuk struk pembayaran.

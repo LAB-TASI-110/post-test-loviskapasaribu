@@ -3,47 +3,63 @@
 #include <stdio.h>
 
 int main() {
+    int n, i, j, k = 0;
     
-    int N;
-    int stok[100];
-    char kategori[100];
-    char cari;
-    int total = 0;
+    printf("Masukkan jumlah data: ");
+    scanf("%d", &n);
 
-    printf("=== SISTEM PENGELOMPOKAN STOK GUDANG ===\n");
+    int data[n];
 
-    // Input jumlah data
-    printf("Masukkan jumlah data barang: ");
-    scanf("%d", &N);
-
-    // Input stok barang
-    printf("\nMasukkan data stok barang:\n");
-    for(int i = 0; i < N; i++) {
-        printf("Stok barang ke-%d : ", i + 1);
-        scanf("%d", &stok[i]);
+    printf("Masukkan stok barang:\n");
+    for(i = 0; i < n; i++) {
+        scanf("%d", &data[i]);
     }
 
-    // Input kategori barang
-    printf("\nMasukkan kategori tiap barang (A/B/C):\n");
-    for(int i = 0; i < N; i++) {
-        printf("Kategori barang ke-%d : ", i + 1);
-        scanf(" %c", &kategori[i]);
-    }
+    // Menentukan ukuran matriks (misal dibuat mendekati persegi)
+    int rows = 2; 
+    int cols = (n + 1) / 2;
 
-    // Input kategori yang dicari
-    printf("\nMasukkan kode kategori yang ingin dicari: ");
-    scanf(" %c", &cari);
+    int rak[rows][cols];
 
-    // Proses menghitung total stok kategori tertentu
-    for(int i = 0; i < N; i++) {
-        if(kategori[i] == cari) {
-            total += stok[i];
+    // Isi zigzag
+    k = 0;
+    for(i = 0; i < rows; i++) {
+        if(i % 2 == 0) {
+            // kiri ke kanan
+            for(j = 0; j < cols && k < n; j++) {
+                rak[i][j] = data[k++];
+            }
+        } else {
+            // kanan ke kiri
+            for(j = cols - 1; j >= 0 && k < n; j--) {
+                rak[i][j] = data[k++];
+            }
         }
     }
 
-    // Output
-    printf("\nKategori yang dicari : %c\n", cari);
-    printf("Total stok barang dalam kategori tersebut : %d\n", total);
+    // tampilkan rak
+    printf("\nSusunan rak (zigzag):\n");
+    for(i = 0; i < rows; i++) {
+        for(j = 0; j < cols; j++) {
+            printf("%3d ", rak[i][j]);
+        }
+        printf("\n");
+    }
+
+    int kategori, total = 0;
+
+    printf("\nMasukkan kategori (0 atau 1): ");
+    scanf("%d", &kategori);
+
+    // Hitung berdasarkan kolom (kategori)
+    for(i = 0; i < rows; i++) {
+        if(kategori < cols) {
+            total += rak[i][kategori];
+        }
+    }
+
+    printf("\nKode Kategori: %d\n", kategori);
+    printf("Total Stok: %d\n", total);
 
     return 0;
 }

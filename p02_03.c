@@ -1,71 +1,60 @@
 // 12S25016 - Loviska Astria Pasaribu
 
 #include <stdio.h>
+#include <string.h>
 
 int main() {
+    char nama[50], menu[50];
+    int jumlah, i, n;
+    float harga, total_item, total_semua = 0;
+    float diskon = 0, total_bayar;
 
-    int jumlahMenu;
-    int i;
+    printf("===== KAFETARIA IT DEL =====\n");
+    printf("Masukkan jumlah pesanan: ");
+    scanf("%d", &n);
+    getchar(); // membersihkan newline
 
-    char namaMenu[50][50];
-    int jumlahPesanan[50];
-    float hargaMenu[50];
-    float totalMenu[50];
+    // Loop input pesanan
+    for(i = 1; i <= n; i++) {
+        printf("\nPesanan ke-%d\n", i);
 
-    float totalBayar = 0;
+        printf("Nama pembeli   : ");
+        fgets(nama, sizeof(nama), stdin);
+        nama[strcspn(nama, "\n")] = 0;
 
-    printf("====================================\n");
-    printf("   SISTEM PEMESANAN KAFETARIA DEL\n");
-    printf("====================================\n");
+        printf("Nama menu      : ");
+        fgets(menu, sizeof(menu), stdin);
+        menu[strcspn(menu, "\n")] = 0;
 
-    printf("Masukkan jumlah jenis menu yang dipesan: ");
-    scanf("%d", &jumlahMenu);
+        printf("Harga          : ");
+        scanf("%f", &harga);
 
-    printf("\n");
+        printf("Jumlah beli    : ");
+        scanf("%d", &jumlah);
+        getchar();
 
-    // Input data pesanan
-    for(i = 0; i < jumlahMenu; i++) {
+        total_item = harga * jumlah;
+        total_semua += total_item;
 
-        printf("Pesanan ke-%d\n", i+1);
-
-        printf("Nama Menu   : ");
-        scanf("%s", namaMenu[i]);
-
-        printf("Jumlah      : ");
-        scanf("%d", &jumlahPesanan[i]);
-
-        printf("Harga Satuan: ");
-        scanf("%f", &hargaMenu[i]);
-
-        totalMenu[i] = jumlahPesanan[i] * hargaMenu[i];
-
-        totalBayar += totalMenu[i];
-
-        printf("\n");
+        printf("Total pesanan  : Rp %.2f\n", total_item);
     }
 
-    // Menampilkan struk
-    printf("\n====================================\n");
-    printf("          STRUK PEMESANAN\n");
-    printf("          KAFETARIA DEL\n");
-    printf("====================================\n");
-
-    printf("No\tMenu\tJumlah\tHarga\tTotal\n");
-
-    for(i = 0; i < jumlahMenu; i++) {
-        printf("%d\t%s\t%d\t%.2f\t%.2f\n",
-               i+1,
-               namaMenu[i],
-               jumlahPesanan[i],
-               hargaMenu[i],
-               totalMenu[i]);
+    // Hitung diskon
+    if(total_semua >= 100000) {
+        diskon = 0.10 * total_semua;
+    } else if(total_semua >= 50000) {
+        diskon = 0.05 * total_semua;
     }
 
-    printf("====================================\n");
-    printf("TOTAL PEMBAYARAN : Rp %.2f\n", totalBayar);
-    printf("====================================\n");
-    printf("Terima kasih telah memesan di\n");
-    printf("Kafetaria IT Del\n");
+    total_bayar = total_semua - diskon;
+
+    // Output struk
+    printf("\n===== STRUK PEMBAYARAN =====\n");
+    printf("Total Belanja : Rp %.2f\n", total_semua);
+    printf("Diskon        : Rp %.2f\n", diskon);
+    printf("Total Bayar   : Rp %.2f\n", total_bayar);
+    printf("============================\n");
+    printf("Terima kasih telah berbelanja!\n");
 
     return 0;
 }
